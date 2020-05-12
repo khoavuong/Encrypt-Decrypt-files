@@ -5,7 +5,7 @@ import {
   UploadedFile,
   Get,
   Res,
-  BadRequestException,
+  NotFoundException,
   Param,
   Req,
 } from '@nestjs/common';
@@ -42,6 +42,9 @@ export class FileController {
     const { key, algorithm } = req.body;
     const dataBuffer = fs.readFileSync(file.path);
     const decryptedFilename = filename.slice(0, filename.length - 4); // remove .aes
+    fs.unlink(file.path, err => {
+      if (err) throw err;
+    });
 
     const decrypted = this.fileService.decrypt(dataBuffer, algorithm, key);
     fs.writeFile(`upload/${decryptedFilename}`, decrypted, function(err) {
@@ -52,8 +55,18 @@ export class FileController {
   }
 
   @Get('/:filepath')
-  seeUploadedFile(@Param('filepath') file, @Res() res) {
-    if (file.includes('/')) throw new BadRequestException();
-    return res.sendFile(file, { root: 'upload' });
+  async seeUploadedFile(@Param('filepath') file, @Res() res) {
+    if (fs.existsSync(`upload/${file}`)) {
+      //res.sendFile(file, { root: 'upload' });
+      await res.download(`upload/${file}`);
+
+      setTimeout(function() {
+        fs.unlink(`upload/${file}`, err => {
+          if (err) throw err;
+        });
+      }, 100);
+    } else {
+      throw new NotFoundException('File not found');
+    }
   }
 }
