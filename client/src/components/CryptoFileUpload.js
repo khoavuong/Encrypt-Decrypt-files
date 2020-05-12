@@ -16,6 +16,8 @@ export const CryptoFileUpload = ({ type }) => {
     onChange(info) {
       let fileList = [...info.fileList];
 
+      fileList = fileList.slice(-1);
+
       fileList = fileList.map((file) => {
         if (file.response) {
           file.url = `http://localhost:3000/file/${file.response.filename}`;
