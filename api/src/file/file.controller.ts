@@ -54,6 +54,19 @@ export class FileController {
     return { filename: decryptedFilename, originalname };
   }
 
+  @Post('/hash')
+  @UseInterceptors(FileInterceptor('file'))
+  hashtFile(@UploadedFile() file, @Req() req) {
+    const { originalname } = file;
+    const dataBuffer = fs.readFileSync(file.path);
+    fs.unlink(file.path, err => {
+      if (err) throw err;
+    });
+
+    const hashBuffered = this.fileService.hash(dataBuffer);
+    return { hash: hashBuffered };
+  }
+
   @Get('/:filepath')
   async seeUploadedFile(@Param('filepath') file, @Res() res) {
     if (fs.existsSync(`upload/${file}`)) {

@@ -3,7 +3,7 @@ import {
   createCipheriv,
   createDecipheriv,
   scryptSync,
-  getCiphers,
+  createHash,
 } from 'crypto';
 
 @Injectable()
@@ -31,5 +31,11 @@ export class FileService {
       decipher.final(),
     ]);
     return decryptedBuffer;
+  }
+
+  hash(buffer) {
+    const hash = createHash('sha256');
+    hash.update(buffer);
+    return hash.digest('hex');
   }
 }

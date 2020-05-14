@@ -14,19 +14,12 @@ export const CryptoFileUpload = ({ type }) => {
     action: `http://localhost:3000/file/${type}`,
     data: { key, algorithm },
     onChange(info) {
-      let fileList = [...info.fileList];
-
-      fileList = fileList.slice(-1);
-
-      fileList = fileList.map((file) => {
-        if (file.response) {
-          file.url = `http://localhost:3000/file/${file.response.filename}`;
-          file.name = file.response.filename;
-        }
-        return file;
-      });
-
-      setFileList(fileList);
+      const { file } = info;
+      if (file.response) {
+        file.url = `http://localhost:3000/file/${file.response.filename}`;
+        file.name = file.response.filename;
+      }
+      setFileList([file]);
     },
   };
 

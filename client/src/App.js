@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { Tabs } from "antd";
+import { Tabs, Collapse } from "antd";
 
 import "./App.css";
 import { CryptoFileUpload } from "./components/CryptoFileUpload";
+import { HashFileUpload } from "./components/HashFileUpload";
 
+const { Panel } = Collapse;
 const { TabPane } = Tabs;
 
 const Container = styled.div`
@@ -18,7 +20,7 @@ const Container = styled.div`
 const App = () => {
   return (
     <Container>
-      <h1>Encrypt/Decrypt files online</h1>
+      <h1 style={{ textAlign: "center" }}>Encrypt/Decrypt files online</h1>
       {/* <h3>
         Nowadays people send sensitive information online. There are some texts
         you may be sending to your employees over the social media or online
@@ -27,7 +29,7 @@ const App = () => {
         allow you send the sensitive message securely online. There are several
         benefits you enjoy when you decide to use the free online tool.
       </h3> */}
-      <h3>How to use this tool:</h3>
+      {/* <h3>How to use this tool:</h3>
       <h4>
         <ol>
           <li>Upload a file</li>
@@ -40,7 +42,25 @@ const App = () => {
         Note: Once you downloaded a processed file, you won't be able to
         download it again. This is to ensure your file will only be accessed
         once.
-      </h3>
+      </h3> */}
+      <Collapse accordion style={{ marginBottom: "20px" }}>
+        <Panel header="How to use this tool" key="1">
+          <h4>
+            <ol>
+              <li>Upload a file</li>
+              <li>Download the file</li>
+              <li>Upload a file</li>
+              <li>Download the file</li>
+            </ol>
+          </h4>
+        </Panel>
+        <Panel header="Note" key="2">
+          <h3>
+            Once you downloaded a processed file, you won't be able to download
+            it again. This is to ensure your file will only be accessed once.
+          </h3>
+        </Panel>
+      </Collapse>
 
       <Tabs defaultActiveKey="encrypt">
         <TabPane tab="Encrypt" key="encrypt">
@@ -48,6 +68,9 @@ const App = () => {
         </TabPane>
         <TabPane tab="Decrypt" key="decrypt">
           <CryptoFileUpload type="decrypt"></CryptoFileUpload>
+        </TabPane>
+        <TabPane tab="Checking file integrity" key="hash">
+          <HashFileUpload></HashFileUpload>
         </TabPane>
       </Tabs>
     </Container>
