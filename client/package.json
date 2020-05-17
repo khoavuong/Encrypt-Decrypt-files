@@ -8,15 +8,16 @@
     "@testing-library/user-event": "^7.2.1",
     "antd": "^4.1.5",
     "axios": "^0.19.2",
+    "env-cmd": "^10.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "3.4.1",
     "styled-components": "^5.1.0"
   },
   "scripts": {
-    "start": "PORT=3005 react-app-rewired start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "PORT=3005 env-cmd -e dev react-app-rewired start",
+    "build": "env-cmd -e prod react-scripts build",
+    "test": "env-cmd -e dev react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

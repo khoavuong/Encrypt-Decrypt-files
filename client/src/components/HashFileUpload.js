@@ -18,7 +18,7 @@ export const HashFileUpload = () => {
 
   const file1Props = {
     name: "file",
-    action: `http://localhost:3000/file/hash`,
+    action: `${process.env.REACT_APP_BASE_URL}/file/hash`,
     onChange(info) {
       const { file } = info;
       if (file.response) setFileHashed1(file.response.hash);
@@ -28,7 +28,7 @@ export const HashFileUpload = () => {
 
   const file2Props = {
     name: "file",
-    action: `http://localhost:3000/file/hash`,
+    action: `${process.env.REACT_APP_BASE_URL}/file/hash`,
     onChange(info) {
       const { file } = info;
       if (file.response) setFileHashed2(file.response.hash);

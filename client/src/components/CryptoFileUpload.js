@@ -11,12 +11,12 @@ export const CryptoFileUpload = ({ type }) => {
 
   const props = {
     name: "file",
-    action: `http://localhost:3000/file/${type}`,
+    action: `${process.env.REACT_APP_BASE_URL}/file/${type}`,
     data: { key, algorithm },
     onChange(info) {
       const { file } = info;
       if (file.response) {
-        file.url = `http://localhost:3000/file/${file.response.filename}`;
+        file.url = `${process.env.REACT_APP_BASE_URL}/file/${file.response.filename}`;
         file.name = file.response.filename;
       }
       setFileList([file]);
@@ -25,7 +25,7 @@ export const CryptoFileUpload = ({ type }) => {
 
   return (
     <div>
-      <p style={{ fontWeight: "bold" }}>Please choose an algorithm:</p>
+      <p style={{ fontWeight: "bold" }}>Choose an algorithm:</p>
       <Select
         style={{ width: "100%" }}
         placeholder="Chose an algorithm"
@@ -37,7 +37,7 @@ export const CryptoFileUpload = ({ type }) => {
       <br />
       <br />
 
-      <p style={{ fontWeight: "bold" }}>Please enter a key:</p>
+      <p style={{ fontWeight: "bold" }}>Enter a key:</p>
       <Input
         placeholder="Enter your key here"
         value={key}
