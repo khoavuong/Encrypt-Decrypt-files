@@ -46,12 +46,23 @@ const App = () => {
       <Collapse accordion style={{ marginBottom: "20px" }}>
         <Panel header="How to use this tool" key="1">
           <h4>
-            <ol>
-              <li>Upload a file</li>
-              <li>Download the file</li>
-              <li>Upload a file</li>
-              <li>Download the file</li>
-            </ol>
+            <ul>
+              <li>
+                "Encrypt" Tab is for encrypting a file with a chosen algorithm
+                and key.
+              </li>
+              <li>
+                "Decrypt" Tab is for decrypting the encrypted file in "Encrypt"
+                tab. The algorithm and key must be suitable to the encrypted
+                file in order to get the correct original file.
+              </li>
+              <li>
+                "Checking file integrity" Tab is for comparing the content of 2
+                files. If the hashed values of 2 files are equal then the
+                contents of those are the same, vice versa.
+              </li>
+              {/* <li>{process.env.REACT_APP_BASE_URL}</li> */}
+            </ul>
           </h4>
         </Panel>
         <Panel header="Note" key="2">
