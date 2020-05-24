@@ -21,54 +21,48 @@ const App = () => {
   return (
     <Container>
       <h1 style={{ textAlign: "center" }}>Encrypt/Decrypt files online</h1>
-      {/* <h3>
-        Nowadays people send sensitive information online. There are some texts
-        you may be sending to your employees over the social media or online
-        messaging platforms and you would like to keep them secret. The secret
-        messages encryption online tool employs AES 256 decryption technology to
-        allow you send the sensitive message securely online. There are several
-        benefits you enjoy when you decide to use the free online tool.
-      </h3> */}
-      {/* <h3>How to use this tool:</h3>
-      <h4>
-        <ol>
-          <li>Upload a file</li>
-          <li>Download the file</li>
-          <li>Upload a file</li>
-          <li>Download the file</li>
-        </ol>
-      </h4>
-      <h3>
-        Note: Once you downloaded a processed file, you won't be able to
-        download it again. This is to ensure your file will only be accessed
-        once.
-      </h3> */}
+
       <Collapse accordion style={{ marginBottom: "20px" }}>
         <Panel header="How to use this tool" key="1">
-          <h4>
+          <h3>
             <ul>
               <li>
-                "Encrypt" Tab is for encrypting a file with a chosen algorithm
-                and key.
+                "Encrypt" Tab is for encrypting a file with a chosen algorithm,
+                cipher mode and password.
               </li>
               <li>
                 "Decrypt" Tab is for decrypting the encrypted file in "Encrypt"
-                tab. The algorithm and key must be suitable to the encrypted
-                file in order to get the correct original file.
+                tab. The algorithm, cipher mode and password must be suitable to
+                the encrypted file in order to get the correct original file.
               </li>
               <li>
-                "Checking file integrity" Tab is for comparing the content of 2
-                files. If the hashed values of 2 files are equal then the
-                contents of those are the same, vice versa.
+                "File integrity" Tab is for comparing the content of 2 files. If
+                the hashed values of 2 files are equal then the contents of
+                those are the same, vice versa.
               </li>
               {/* <li>{process.env.REACT_APP_BASE_URL}</li> */}
             </ul>
-          </h4>
+          </h3>
         </Panel>
         <Panel header="Note" key="2">
           <h3>
-            Once you downloaded a processed file, you won't be able to download
-            it again. This is to ensure your file will only be accessed once.
+            <ul>
+              <li>
+                Once you downloaded a processed file, you won't be able to
+                download it again. This is to ensure your file will only be
+                accessed once.
+              </li>
+              <li>
+                Password field is used to derive the key with length correspond
+                to the algorithm using "scrypt" hash.
+              </li>
+              <li>
+                You might decrypt successfully even if your algorithm, password
+                or cipher mode is incorrect. But the content of the decrypted
+                file will not be the same as the original file
+              </li>
+              <li>The hash algorithm for checking file integrity is SHA256.</li>
+            </ul>
           </h3>
         </Panel>
       </Collapse>
@@ -80,7 +74,7 @@ const App = () => {
         <TabPane tab="Decrypt" key="decrypt">
           <CryptoFileUpload type="decrypt"></CryptoFileUpload>
         </TabPane>
-        <TabPane tab="Checking file integrity" key="hash">
+        <TabPane tab="File integrity" key="hash">
           <HashFileUpload></HashFileUpload>
         </TabPane>
       </Tabs>
