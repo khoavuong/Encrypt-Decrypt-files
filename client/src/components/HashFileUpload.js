@@ -24,6 +24,7 @@ export const HashFileUpload = () => {
       if (file.response) setFileHashed1(file.response.hash);
       setFileList1([file]);
     },
+    showUploadList: { showRemoveIcon: false },
   };
 
   const file2Props = {
@@ -34,6 +35,7 @@ export const HashFileUpload = () => {
       if (file.response) setFileHashed2(file.response.hash);
       setFileList2([file]);
     },
+    showUploadList: { showRemoveIcon: false },
   };
 
   const textCompare = (text1, text2) => {
